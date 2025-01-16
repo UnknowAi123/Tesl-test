@@ -1,3 +1,4 @@
+
 window.onload = function() {
     let canvas = document.getElementById('MainCanvas');
     let selectCardClass = document.getElementById('CardClass');
@@ -104,6 +105,7 @@ window.onload = function() {
                 if (evt.target.readyState === FileReader.DONE) {
                     img.src = evt.target.result;
                     img.onload = function () {
+
                         currentCard.art = cropImage(img, 320, 420);
                     };
                 }
@@ -112,12 +114,20 @@ window.onload = function() {
     };
 
     btnSaveImage.onclick = function (e) {
-        html2canvas(canvas).then(capture => {
-            let link = document.createElement('a');
-            link.href = capture.toDataURL('image/png');
-            link.download = currentCard.title.replace(/[^a-zA-Z0-9]/g, '-') + '.png';
-            link.click();
-        });
+        canvas.toBlob(function (blob) {
+            let downloadName = "image.png";
+            if (currentCard.title) {
+                downloadName = currentCard.title.replace(/[^a-zA-Z0-9]/g, '-') + '.png';
+            }
+
+            let a = document.createElement('A');
+            a.download = downloadName;
+            a.href = window.URL.createObjectURL(blob);
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+
+        }, "image/png");
     };
 
     function loadValues(card) {
@@ -159,7 +169,7 @@ window.onload = function() {
         if (layerSupport) ctx.drawImage(layerSupport, 0, 0);
         else if (layerPH) ctx.drawImage(layerPH, 0, 0);
 
-        // Magicka
+        //Magicka
         ctx.textAlign = "center";
         ctx.font = 'bold 54px Ubuntu';
         ctx.fillStyle = '#000000';
@@ -168,13 +178,13 @@ window.onload = function() {
         ctx.fillText(currentCard.magicka, 65, 110);
 
         if (currentCard.supportShout) {
-            // Support
+            //Support
             ctx.textAlign = "center";
             ctx.font = '700 16px Merriweather';
             ctx.fillStyle = '#111';
             ctx.fillText(currentCard.supportShout, 220, 488);
         } else if (currentCard.power && currentCard.health) {
-            // Power & Health
+            //Power & Health
             ctx.textAlign = "center";
             ctx.font = 'bold 52px Ubuntu';
             ctx.fillStyle = '#FDF6DF';
@@ -182,13 +192,13 @@ window.onload = function() {
             ctx.fillText(currentCard.health, 375, 415);
         }
 
-        // Type
+        //Type
         ctx.textAlign = "center";
         ctx.font = '300 14px Merriweather';
         ctx.fillStyle = '#E0DDb9';
         ctx.fillText(currentCard.type, 220, 130);
 
-        // Title
+        //Title
         let titleFontSize = currentCard.title.length >= 27 ? 14
             : currentCard.title.length >= 20 ? 16 : 22;
         ctx.textAlign = "center";
@@ -196,7 +206,7 @@ window.onload = function() {
         ctx.fillStyle = '#FDF6DF';
         ctx.fillText(currentCard.title, 220, 102);
 
-        // ArtAttribution
+        //ArtAttribution
         if(currentCard.artAttribution) {
             ctx.textAlign = "center";
             ctx.font = '300 12px Merriweather';
@@ -208,7 +218,7 @@ window.onload = function() {
             ctx.fillText(currentCard.artAttribution, 230 - 8, ardAttrTop);
         }
 
-        // Text
+        //Text
         drawCardText(ctx);
     }
 
@@ -305,17 +315,7 @@ window.onload = function() {
     function generateTextParts(line) {
         let parts = [];
 
-        let regex = new RegExp(/(
-
-\[[^\]
-
-]+\]
-
-)|(\([aeinsw]\))|([^()
-
-\[\]
-
-]*)/g);
+        let regex = new RegExp(/(\[[^\]]+\])|(\([aeinsw]\))|([^()\[\]]*)/g);
         let matches = line.match(regex);
 
         for (let i = 0; i < matches.length; i++) {
@@ -382,6 +382,7 @@ window.onload = function() {
             if (part.IsBold) ctx.font = 'bold ' + ctx.font;
             ctx.fillText(part.Text, xCurrent, yText);
             xCurrent += ctx.measureText(part.Text).width;
+
         }
     }
 
