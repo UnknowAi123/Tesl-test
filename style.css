@@ -39,7 +39,7 @@ input[type="text"],
 input[type="number"],
 textarea {
     width: 200px;
-    padding: 5px 20px;
+    padding: 5px 10px;
     margin: 0 auto;
 }
 input[type="number"]::-webkit-inner-spin-button,
