@@ -204,7 +204,7 @@ window.onload = function() {
         ctx.textAlign = "center";
         ctx.font = 'bold ' + titleFontSize + 'px Merriweather';
         ctx.fillStyle = '#FDF6DF';
-        ctx.fillText(currentCard.title, 218, 105);
+        ctx.fillText(currentCard.title, 220, 105);
 
         //ArtAttribution
         if(currentCard.artAttribution) {
