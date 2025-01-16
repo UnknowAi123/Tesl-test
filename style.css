@@ -1,3 +1,4 @@
+
 * {
     padding: 0;
     margin: 0;
@@ -124,18 +125,3 @@ td {
         font-family: sans-serif;
     }
 }
-
-/* Nuevas reglas CSS para ajustar el tamaño visible del canvas */
-.image-container {
-    width: 100%; /* Ajusta el ancho del contenedor */
-    max-width: 440px; /* Define un ancho máximo para la visualización */
-    height: auto;
-    overflow: hidden; /* Oculta el exceso si hay */
-    margin: auto; /* Centra el contenedor */
-}
-
-#MainCanvas {
-    width: 100%; /* Ajusta el canvas al ancho del contenedor */
-    height: auto; /* Mantén la proporción de aspecto */
-}
-
