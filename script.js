@@ -199,8 +199,8 @@ window.onload = function() {
         ctx.fillText(currentCard.type, 220, 130);
 
         //Title
-        let titleFontSize = currentCard.title.length >= 27 ? 14
-            : currentCard.title.length >= 17 ? 16 : 24;
+        let titleFontSize = currentCard.title.length >= 28 ? 14
+            : currentCard.title.length >= 17 ? 16 : 22;
         ctx.textAlign = "center";
         ctx.font = 'bold ' + titleFontSize + 'px Merriweather';
         ctx.fillStyle = '#FDF6DF';
