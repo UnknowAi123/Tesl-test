@@ -199,12 +199,12 @@ window.onload = function() {
         ctx.fillText(currentCard.type, 220, 130);
 
         //Title
-        let titleFontSize = currentCard.title.length >= 28 ? 14
+        let titleFontSize = currentCard.title.length >= 27 ? 14
             : currentCard.title.length >= 17 ? 16 : 22;
         ctx.textAlign = "center";
         ctx.font = 'bold ' + titleFontSize + 'px Merriweather';
         ctx.fillStyle = '#FDF6DF';
-        ctx.fillText(currentCard.title, 220, 100);
+        ctx.fillText(currentCard.title, 220, 102);
 
         //ArtAttribution
         if(currentCard.artAttribution) {
